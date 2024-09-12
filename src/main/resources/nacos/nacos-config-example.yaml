@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        #serverAddr: 127.0.0.1:8848
+        prefix: PREFIX
+        group: GROUP
+        namespace: NAMESPACE
+
+# 错误配置测试
+# - var2: lalala

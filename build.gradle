@@ -7,36 +7,43 @@ buildscript {
 
 plugins {
     id 'java'
+    // https://spring.io/projects/spring-boot
     id 'org.springframework.boot' version '2.7.18'
+    // https://github.com/spring-gradle-plugins/dependency-management-plugin
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
 group = 'net.hifor.demo'
 version = '0.0.1-SNAPSHOT'
 
-
 java {
     sourceCompatibility = JavaVersion.VERSION_11
 }
 
 repositories {
+    mavenLocal()
     maven { url "https://maven.aliyun.com/repository/public/" }
     mavenCentral()
 }
 
 ext {
+    // https://spring.io/projects/spring-cloud
+    set('springCloudVersion', "2021.0.9")
+    // https://github.com/alibaba/spring-cloud-alibaba
     set('springCloudAlibabaVersion', "2021.0.6.1")
 }
 
 dependencyManagement {
     imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${springCloudAlibabaVersion}"
     }
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation ('org.springframework.boot:spring-boot-starter-web')
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
 
